@@ -7,6 +7,8 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@tiptap/starter-kit": "^2.0.0-beta.199",
+    "@tiptap/vue-3": "^2.0.0-beta.199",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.18",
     "register-service-worker": "^1.7.2",
@@ -15,6 +17,7 @@
     "vue-router": "^4.0.3"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.7",
     "@vue/cli-plugin-pwa": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
