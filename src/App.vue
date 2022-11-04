@@ -51,10 +51,12 @@ export default {
       {
          return new Promise((resolve, reject)=>{
             //initialize a connection to database and pass it a name like notes and define its version to be 1
-            let db = window.indexedDB.open('notes', 3)
+            let db = window.indexedDB.open('myNotes', 3)
 
             db.onerror = (event) => {
                reject("Error Opening the datatbase !! ")
+               console.error(`Database error: ${event.target.errorCode}`);
+
             };
 
             db.onsuccess = (event) => {
@@ -69,7 +71,7 @@ export default {
                // Save the IDBDatabase interface
                const db = event.target.result;
                
-               db.deleteObjectStore("notes")
+             //  db.deleteObjectStore("notes")
                // Create an objectStore for this database
                const objectStore = db.createObjectStore("notes", {
                   keyPath: 'created'
