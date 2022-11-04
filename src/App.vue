@@ -1,5 +1,11 @@
 <template>
    <div class="flex w-screen h-screen text-gray-700">
+      <div v-if="isOffline" class="absolute top-0 left-0 opacity-75 z-10 w-full text-center py-2 bg-red-300 border-b border-red-700 text-white">
+         Sorry it's look like you are offline 
+      </div>
+
+
+
       <div class="flex flex-col flex-shrink-0 w-64 border-r border-gray-300 bg-gray-100">
         <!-- sidebar -->
         <div class="h-0 overflow-auto flex-grow">
@@ -92,7 +98,8 @@ export default {
       editor: null,
       database: null,
       notes:[],
-      activeNote:{}
+      activeNote:{},
+      isOffline: !navigator.onLine
     }
   },
   methods:{
@@ -199,6 +206,14 @@ export default {
             transaction.objectStore("notes").add(note);
 
          })
+    },
+    syncUsersData()
+    {
+      if(this.isOffline){
+         return;
+      }
+
+      //make api request to external server 
     }
   },
   async created()
@@ -220,6 +235,17 @@ export default {
    },
 
    })
+
+   window.addEventListener('offline', ()=>{
+      this.isOffline = true
+   })
+
+   window.addEventListener('online', ()=>{
+      this.isOffline = false
+      //sync up users data  with an external api 
+      this.syncUsersData()
+   })
+
   },
 
   beforeUnmount() {
